@@ -41,7 +41,7 @@ public class UserController {
     public UserResponseDto getUserById(@PathVariable long id){
         return userService.getUserById(id);
     }
-    @GetMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     public List<UserResponseDto> getUserById(){
         return userService.getUsers();
     }

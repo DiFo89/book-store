@@ -16,3 +16,9 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
+
+server:
+  # Привязывает сервер ко всем сетевым интерфейсам (обычно это значение по умолчанию)
+  address: 127.0.0.200
+  # Порт, на котором работает приложение (по умолчанию 8080)
+  port: 8080
