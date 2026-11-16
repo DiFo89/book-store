@@ -9,13 +9,15 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http){
         http
-                .csrf(AbstractHttpConfigurer::disable) // Отключить CSRF для удобства тестирования
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/**").permitAll() // Разрешить анонимный доступ к /api/**
+                        .requestMatchers("/error").permitAll() // Важно! Разрешаем эндпоинт ошибок
+                        .requestMatchers("/api/**").permitAll() // Разрешаем ваше API
                         .anyRequest().authenticated()
                 );
         return http.build();
     }
+
 }

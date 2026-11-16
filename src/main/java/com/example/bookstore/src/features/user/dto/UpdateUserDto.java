@@ -5,8 +5,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public record UpdateUserDto (
-    @NotBlank(message = "Id is require")
-    @Size(max = 100)
     long id,
 
     @NotBlank(message = "First name is require")

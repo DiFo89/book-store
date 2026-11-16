@@ -1,4 +1,5 @@
 spring:
+
   application:
     name: book-store
 
@@ -22,3 +23,7 @@ server:
   address: 127.0.0.200
   # Порт, на котором работает приложение (по умолчанию 8080)
   port: 8080
+
+logging:
+  level:
+    org.springframework.security: DEBUG

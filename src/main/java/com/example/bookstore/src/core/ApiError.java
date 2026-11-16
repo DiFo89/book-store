@@ -1,11 +1,15 @@
 package com.example.bookstore.src.core;
 
-public class ApiError {
-    private final String code;
-    private final String message;
+import java.time.Instant;
 
-    public ApiError(String code, String message){
-        this.code = code;
-        this.message = message;
+public record ApiError (
+    String code,
+    String message,
+    Instant timestamp,
+    String path
+
+){
+    public ApiError(String code, String message, String path){
+        this(code, message, Instant.now(), path);
     }
 }

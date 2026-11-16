@@ -32,19 +32,15 @@ public class UserService {
         return userMapper.toResponse(user);
     }
 
-    public UserResponseDto deleteUserById(long id){
+    public void deleteUserById(long id){
        User user = userRepository.findById(id).orElseThrow(()->new UserNotFoundException(id));
        userRepository.delete(user);
-        return userMapper.toResponse(user);
     }
     public UserResponseDto updateUser(UpdateUserDto updateUserDto){
-        User user = userRepository.findById(updateUserDto.id()).orElseThrow(()->new UserNotFoundException(updateUserDto.id()));
-        user.setEmail(updateUserDto.email());
-        user.setSecondName(updateUserDto.secondName());
-        user.setFirstName(updateUserDto.firstName());
-        user.setLastName(updateUserDto.lastName());
-        final User updatedUser = userRepository.save(user);
-        return userMapper.toResponse(updatedUser);
+        userRepository.findById(updateUserDto.id()).orElseThrow(()->new UserNotFoundException(updateUserDto.id()));
+        User updatedUser = userMapper.toEntityFromUpdate(updateUserDto);
+        final User updateResult = userRepository.save(updatedUser);
+        return userMapper.toResponse(updateResult);
     }
     public UserResponseDto getUserById(long id){
         User user = userRepository.findById(id).orElseThrow(()->new UserNotFoundException(id));
