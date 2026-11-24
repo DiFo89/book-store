@@ -1,6 +1,5 @@
 package com.example.bookstore.src.core.error;
 
-import com.example.bookstore.src.core.ApiError;
 import com.example.bookstore.src.features.author.exceptions.AuthorNotFoundException;
 import com.example.bookstore.src.features.user.exceptions.UserLoginIsAlreadyExists;
 import com.example.bookstore.src.features.user.exceptions.UserNotFoundException;

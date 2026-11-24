@@ -4,6 +4,7 @@ import com.example.bookstore.src.features.user.dto.CreateUserDto;
 import com.example.bookstore.src.features.user.dto.UpdateUserDto;
 import com.example.bookstore.src.features.user.dto.UserResponseDto;
 import com.example.bookstore.src.features.user.entity.User;
+import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -21,14 +22,18 @@ public class UserMapper {
         return user;
     }
     public User toEntityFromCreate(CreateUserDto createUserDto){
+        return getUser(createUserDto.firstName(), createUserDto.lastName(), createUserDto.secondName(), createUserDto.email(), createUserDto.password(), createUserDto.login() );
+    }
+    @NonNull
+    public static User getUser(String s, String s2, String s3, String email, String password, String login) {
         User user = new User();
 
-        user.setFirstName(createUserDto.firstName());
-        user.setLastName(createUserDto.lastName());
-        user.setSecondName(createUserDto.secondName());
-        user.setEmail(createUserDto.email());
-        user.setPassword(createUserDto.password());
-        user.setLogin(createUserDto.login());
+        user.setFirstName(s);
+        user.setLastName(s2);
+        user.setSecondName(s3);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setLogin(login);
         return user;
     }
 

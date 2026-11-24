@@ -19,11 +19,13 @@ spring:
         format_sql: true
 
 server:
-  # Привязывает сервер ко всем сетевым интерфейсам (обычно это значение по умолчанию)
   address: 127.0.0.200
-  # Порт, на котором работает приложение (по умолчанию 8080)
   port: 8080
 
 logging:
   level:
     org.springframework.security: DEBUG
+
+jwt:
+  secret: ${JWT_SECRET:DOu438gjf57rgflghufdiuodsfiu34587hfdghuriegherighuiergheirghirueghe}
+  expiration: 86400000

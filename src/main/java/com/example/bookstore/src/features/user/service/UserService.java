@@ -6,6 +6,7 @@ import com.example.bookstore.src.features.user.dto.UserResponseDto;
 import com.example.bookstore.src.features.user.entity.User;
 import com.example.bookstore.src.features.user.exceptions.UserLoginIsAlreadyExists;
 import com.example.bookstore.src.features.user.exceptions.UserNotFoundException;
+import com.example.bookstore.src.features.user.exceptions.UserWithLoginNotFound;
 import com.example.bookstore.src.features.user.mapper.UserMapper;
 import com.example.bookstore.src.features.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -25,11 +26,14 @@ public class UserService {
 
     @Transactional
     public UserResponseDto createUser(CreateUserDto createUserDto){
-        if(userRepository.existsByLogin(createUserDto.login())){
-            throw new UserLoginIsAlreadyExists(createUserDto.login());
-        }
-        User user = userRepository.save(userMapper.toEntityFromCreate(createUserDto));
+        User user = createUserNative(userMapper.toEntityFromCreate(createUserDto));
         return userMapper.toResponse(user);
+    }
+    public User createUserNative(User user){
+        if(userRepository.existsByLogin(user.getLogin())){
+            throw new UserLoginIsAlreadyExists(user.getLogin());
+        }
+        return userRepository.save(user);
     }
 
     public void deleteUserById(long id){
@@ -49,5 +53,8 @@ public class UserService {
     public List<UserResponseDto> getUsers(){
         List<User> users = userRepository.findAll();
         return users.stream().map(userMapper::toResponse).toList();
+    }
+    public User getByLogin(String login){
+        return userRepository.findByLogin(login).orElseThrow(()->new UserWithLoginNotFound(login));
     }
 }

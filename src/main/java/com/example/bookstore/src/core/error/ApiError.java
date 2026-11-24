@@ -1,4 +1,4 @@
-package com.example.bookstore.src.core;
+package com.example.bookstore.src.core.error;
 
 import java.time.Instant;
 
